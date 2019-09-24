@@ -1,0 +1,99 @@
+<div class="container">
+  <div [hidden]="submitted">
+    <div class="col-md-1"></div>
+    <div class="col-md-9 ">
+      <form (ngSubmit)="onSubmit(projectForm)" name="projectForm" #projectForm="ngForm" class="form-horizontal">
+        <input type="hidden" name="projectID" #userID="ngModel" [(ngModel)]="project.ProjectID">
+
+        <div class="form-group" [ngClass]="{
+        'has-danger': projecttitle.invalid && projecttitle.dirty, 
+        'has-success': projecttitle.valid && projecttitle.dirty 
+      }">
+          <label class="control-label col-sm-2" for="projecttitle">Project:</label>
+          <div class="col-sm-10">
+            <input type="text" id="projecttitle" required class="form-control" [(ngModel)]="project.ProjectTitle" name="projecttitle"
+              #projecttitle="ngModel" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="projecttitle"></label>
+          <div class="col-sm-10">
+            <input type="checkbox" id="chkDate" name="chkDate" (change)="onCheckedChange($event)" value="chkDate" unchecked />
+            &nbsp;
+            <label for="chkDate"> Set start and end date</label>
+            &nbsp;
+            <input type="date" id="start" name="start"
+            [ngModel]="project.Startdate | date:'yyyy-MM-dd'" 
+            (ngModelChange)="project.Startdate = $event"
+            [value]="project.Startdate | date:'yyyy-MM-dd'"
+            [disabled]="!dateDisabled" #start="ngModel">
+            &nbsp;
+            <input type="date" id="end" name="end"
+            [ngModel]="project.Enddate | date:'yyyy-MM-dd'" 
+            (ngModelChange)="project.Enddate = $event"
+            [value]="project.Enddate | date:'yyyy-MM-dd'"
+            [disabled]="!dateDisabled" #start="ngModel">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="priority">Priority:</label>
+          <div class="col-sm-10">
+            <input type="range" id="priority" name="priority" [(ngModel)]="project.Priority" min="0" max="30" />
+            {{project.Priority}}
+          </div>
+        </div>
+
+        <div class="form-group">
+          <input type="hidden" [(ngModel)]="this.project.UserID" #userID="ngModel" name="hiddenUserID" />
+          <label class="control-label col-sm-2" for="priority">Manager:</label>
+          <div class="col-sm-10">
+            <div class="input-group">
+              <input type="text" [(ngModel)]="this.project.FirstName" id="projectmanager" required class="form-control"
+                name="projectmanager" #firstName="ngModel" disabled />
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button" name="btnprojectmanager" (click)="OpenManagerPopup()">Manager</button>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="priority"></label>
+          <div class="col-sm-10">
+            <button type="submit" class="btn btn-success">{{this.buttonText}}</button>
+            &nbsp;
+            <button type="reset" class="btn btn-success">Reset</button>
+          </div>
+        </div>
+      </form>
+     
+    </div>
+    <div class="col-md-1"></div>
+     <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Project Title</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Priority</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let project of projects">
+            <td>{{project.ProjectTitle}}</td>
+            <td>{{project.StartDate |date:"dd/MM/yyyy" }}</td>
+            <td>{{project.EndDate |date:"dd/MM/yyyy"}}</td>
+            <td>{{project.Priority}}</td>
+            <td style="width: 180px;">
+                <div class="btn-group" role="group">
+                    <button class="btn btn-success"  (click)="edit(project)">Edit</button>
+                    <button class="btn btn-success" (click)="delete(project.ProjectID)">Delete</button>
+                </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
+</div>

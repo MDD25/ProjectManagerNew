@@ -1,0 +1,29 @@
+<h1 mat-dialog-title>Select Parent Task</h1>
+<div mat-dialog-content>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Parent ID</th>
+        <th>Parent Name</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let pt of parentTasks">        
+        <td>{{pt.ParentID}}</td>
+        <td>{{pt.ParentTask}}</td>
+        <td>
+          <div class="col-md-7" style="text-align: end">
+            <button mat-button [mat-dialog-close] = "pt" type="button" class="btn btn-success">Add</button>
+            <!-- (click) = "onselectManager(User)" -->
+          </div>
+        </td>
+        
+        <!-- <td style="width: 70px;">
+          <i class="glyphicon glyphicon-edit pointer" (click)="edit(User)" title="Edit"></i>
+          <i class="glyphicon glyphicon-trash pointer" (click)="delete(User.ProjectID)" title="Delete"></i>
+        </td> -->
+      </tr>
+    </tbody>
+  </table>
+</div>

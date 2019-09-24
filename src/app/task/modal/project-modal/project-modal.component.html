@@ -1,0 +1,23 @@
+<h1 mat-dialog-title>Select Project</h1>
+<div mat-dialog-content>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Project ID</th>
+        <th>Project Title</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let project of projects">        
+        <td>{{project.ProjectID}}</td>
+        <td>{{project.ProjectTitle}}</td>
+        <td>
+          <div class="col-md-7" style="text-align: end">
+            <button mat-button [mat-dialog-close] = "project" type="button" class="btn btn-success">Add</button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

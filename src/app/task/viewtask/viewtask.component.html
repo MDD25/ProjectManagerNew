@@ -1,0 +1,63 @@
+<div class="container">
+  <div [hidden]="submitted">
+    <div class="col-md-12 ">
+      <form (ngSubmit)="onSubmit(viewTaskForm)" name="viewTaskForm" class="form-horizontal">
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label class="control-label col-sm-2" for="priority">Project:</label>
+            <div class="input-group">
+              <input type="text" [(ngModel)]="viewTaskModel.ProjectName" id="projectName" required class="form-control"
+                name="projectName" disabled />
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button" name="btnProjectName" (click)="OpenProjectPopup()">Search</button>
+              </span>
+            </div>
+          </div>
+          <div class="form-group col-md-6">
+              <label class="control-label col-sm-4" for="priority">Sort Task By:</label>
+            <div class="btn-group">
+              <button class="btn btn-default" type="button" name="btn1" (click)="sortTask('StartDate')">Start Date</button>
+              <button class="btn btn-default" type="button" name="btn2" (click)="sortTask('EndDate')">End Date</button>
+              <button class="btn btn-default" type="button" name="btn1" (click)="sortTask('Priority')">Priority</button>
+              <button class="btn btn-default" type="button" name="btn2" (click)="sortTask('Status')">Completed</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="row">
+        <div class="col-md-1"> </div>
+        <div class="col-md-10">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Task</th>
+                <th>Parent</th>
+                <th>Priority</th>
+                <th>Start</th>
+                <th>End</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let task of viewTaskModel.TaskList">
+                <td>{{task.TaskName}}</td>
+                <td>{{task.ParentTaskName =="" ?"Parent task not availble" : task.ParentTaskName}}</td>
+                <td>{{task.Priority}}</td>
+                <td>{{task.StartDate | date:"dd/MM/yyyy" }}</td>
+                <td>{{task.EndDate | date:"dd/MM/yyyy" }}</td>
+                <td style="width:180px">
+                  <div class="btn-group tablegrp" role="group">
+                      <button class="btn btn-success" style="margin:0 3px;" [routerLink] ="['/task','edit', {id:task.TaskID}]">Edit</button>
+                      <!-- <button class="btn btn-success" style="margin:0 3px;" (click) = "edit(task.TaskID)">Edit</button> -->
+                      <button class="btn btn-success"  style="margin:0 3px;"  (click)="endTask(task.TaskID)">End Task</button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-md-1"> </div>
+      </div>
+  </div>
+</div>

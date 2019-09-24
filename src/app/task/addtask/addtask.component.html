@@ -1,0 +1,103 @@
+<div class="container">
+  <div [hidden]="submitted">
+    <div class="col-md-1"></div>
+    <div class="col-md-9 ">
+      <form (ngSubmit)="onSubmit(taskForm)" name="taskForm" class="form-horizontal">
+        <!-- <input type="hidden" name="taskID" #taskID="ngModel" [(ngModel)]="viewModel.TaskID"> -->
+
+        <div class="form-group">
+          <!-- <input type="hidden" [(ngModel)]="viewModel.ProjectID" #userID="ngModel" name="hiddenProjectID" /> -->
+          <label class="control-label col-sm-2" for="priority">Project:</label>
+          <div class="col-sm-10">
+            <div class="input-group">
+              <input type="text" [(ngModel)]="viewModel.ProjectName" id="projectName" required class="form-control"
+                name="projectName" disabled />
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button" name="btnProjectName" (click)="OpenProjectPopup()">Search</button>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="task">Task:</label>
+          <div class="col-sm-10">
+            <input type="text" id="task" required class="form-control" [(ngModel)]="viewModel.TaskName" name="task"
+              #task="ngModel" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="chkParentTask"></label>
+          <div class="col-sm-10">
+            <input type="checkbox" id="chkParentTask" name="chkParentTask" [(ngModel)]="viewModel.IsParentTask" checked />
+            <span>Parent Task?</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="priority">Priority:</label>
+          <div class="col-sm-10">
+            <input type="range" id="priority" name="priority" [(ngModel)]="viewModel.Priority" min="0" max="30"
+              [disabled]="viewModel.IsParentTask" />
+            {{viewModel.Priority}}
+          </div>
+        </div>
+
+        <div class="form-group">
+          <!-- <input type="hidden" [(ngModel)]="viewModel.ParentTaskID" #userID="ngModel" name="hiddenParentID" /> -->
+          <label class="control-label col-sm-2" for="priority">Parent Task:</label>
+          <div class="col-sm-10">
+            <div class="input-group">
+              <input type="text" [(ngModel)]="viewModel.ParentTaskName" id="parentName" required class="form-control"
+                name="parentName" disabled />
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button" name="btnParentName" (click)="OpenParentTaskPopup()"
+                  [disabled]="viewModel.IsParentTask">Search</button>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="start">Start Date</label>
+          <div class="col-sm-4">
+            <input type="date" id="start" name="start" [ngModel]="viewModel.StartDate | date:'yyyy-MM-dd'" [disabled]="viewModel.IsParentTask"
+              (ngModelChange)="viewModel.StartDate = $event" [value]="viewModel.StartDate | date:'yyyy-MM-dd'" #start="ngModel">
+          </div>
+
+          <label class="control-label col-sm-2" for="end">End Date</label>
+          <div class="col-sm-4">
+            <input type="date" id="end" name="end" [ngModel]="viewModel.EndDate | date:'yyyy-MM-dd'" (ngModelChange)="viewModel.EndDate = $event"
+              [value]="viewModel.EndDate | date:'yyyy-MM-dd'" #end="ngModel" [disabled]="viewModel.IsParentTask">
+          </div>
+        </div>
+        <div class="form-group">
+          <!-- <input type="hidden" [(ngModel)]="viewModel.UserID" #userID="ngModel" name="hiddenUserID" /> -->
+          <label class="control-label col-sm-2" for="priority">User:</label>
+          <div class="col-sm-10">
+            <div class="input-group">
+              <input type="text" [(ngModel)]="viewModel.UserName" id="userName" required class="form-control" name="userName"
+                disabled />
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button" name="btnUserName" (click)="OpenUserPopup()" [disabled]="viewModel.IsParentTask">Search</button>
+                <!-- <button class="btn btn-default" type="button" name="btnUserName" (click)="Open(content)" >Search</button> -->
+
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="submit"></label>
+          <div class="col-sm-10">
+            <button type="submit" class="btn btn-success">Update</button>
+            &nbsp;
+            <button type="reset" class="btn btn-success">Reset</button>
+          </div>
+        </div>
+      </form>
+
+    </div>
+    <div class="col-md-1"></div>
+  </div>
+</div>

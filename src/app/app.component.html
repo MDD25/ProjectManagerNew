@@ -1,0 +1,30 @@
+<div class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-collapse collapse">
+      <a class="navbar-brand" href="#">
+        <img style="width: 32px" src="../assets/Images/PM_logo1.png">
+        Project Manager
+      </a>
+      <ul class="nav navbar-nav navbar-left">
+        <li>
+          <a routerLink="/project" routerLinkActive="active">Add Project</a>
+        </li>
+        <li>
+          <a [routerLink]="['/task', 'add']" routerLinkActive="active">Add Task</a>
+        </li>
+        <li>
+          <a routerLink="/user" routerLinkActive="active">Add User</a>
+        </li>
+        <li>
+          <a routerLink="/task/view" routerLinkActive="active">View Task</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="container body-content">
+  <div [@routeAnimation]="getAnimationData(routerOutlet)">
+    <router-outlet #routerOutlet="outlet"></router-outlet>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+<h1 mat-dialog-title>Select Manager</h1>
+<div mat-dialog-content>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>User ID</th>
+        <th>First Name</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let User of users">        
+        <td>{{User.UserID}}</td>
+        <td>{{User.FirstName}}</td>
+        <td>
+          <div class="col-md-7" style="text-align: end">
+            <button mat-button [mat-dialog-close] = "User" type="button" class="btn btn-success">Add</button>
+          </div>
+        </td>
+        
+      </tr>
+    </tbody>
+  </table>
+</div>

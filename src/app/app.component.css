@@ -1,0 +1,18 @@
+/* a {  
+
+    text-decoration: none;
+    padding: 2%;
+    margin: 0%
+
+  
+  } */
+
+  .navbar-brand
+  {
+      color: #2a4a97;
+      padding-top: 10px !important
+  }
+  .navbar-brand>img
+  {
+      display: inline !important
+  }
